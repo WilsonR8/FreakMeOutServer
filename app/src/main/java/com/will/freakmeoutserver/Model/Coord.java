@@ -5,14 +5,15 @@ public class Coord {
     private float y;
     private String type = "Coord";
 
+    public Coord(float posx, float posy){}
+
     public Coord(int x,int y) {
+        super();
         this.x=x;
         this.y=y;
     }
 
-    public Coord(float x, float y){
 
-    };
 
     public float getX() {
         return x;
@@ -29,6 +30,7 @@ public class Coord {
     public void setY(float y) {
         this.y = y;
     }
+
 
     public String getType() {
         return type;

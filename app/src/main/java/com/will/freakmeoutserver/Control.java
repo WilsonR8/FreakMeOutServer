@@ -21,8 +21,8 @@ public class Control extends AppCompatActivity implements View.OnTouchListener,O
     private Button rbtn;
     private Button grab;
 
-    float posx=250;
-    float posy=250;
+    public float posx=250,posy=250;
+
 
     Boolean Upress = false;
     Boolean Dpress = false;
@@ -68,15 +68,16 @@ public class Control extends AppCompatActivity implements View.OnTouchListener,O
                     case R.id.ubtn:
                         Log.e("up", "presiooooooooon");
                         Upress = true;
-                        Gson Gup = new Gson();
+
                         new Thread(
                                 () -> {
                                     while (Upress) {
                                         if (posy >= 10) {
                                             posy -= 0.2;
 
-                                            Coord move = new Coord(posx, posy);
-                                            String json = Gup.toJson(move);
+                                            Coord coor = new Coord(posx, posy);
+                                            Gson gson = new Gson();
+                                            String json = gson.toJson(coor);
                                             tcp.sendMessage(json);
                                         }
                                     }
@@ -88,25 +89,64 @@ public class Control extends AppCompatActivity implements View.OnTouchListener,O
                     case R.id.dbtn:
                         Log.e("down", "presiooooooooon");
                         Dpress = true;
-                        Gson Gdown = new Gson();
                         new Thread(
                                 () -> {
                                     while (Dpress) {
                                         if (posy <= 650) {
                                             posy += 0.2;
 
-                                            Coord move = new Coord(posx, posy);
-                                            String json = Gdown.toJson(move);
+                                            Coord coor = new Coord(posx, posy);
+                                            Gson gson = new Gson();
+                                            String json = gson.toJson(coor);
                                             tcp.sendMessage(json);
                                         }
                                     }
                                 }
                         ).start();
                         break;
+
+
+                    case R.id.lbtn:
+                        Log.e("left", "presiooooooooon");
+                        Lpress = true;
+                        new Thread(
+                                () -> {
+                                    while (Lpress) {
+                                        if (posx >= 50) {
+                                            posx -= 0.2;
+
+                                            Coord coor = new Coord(posx, posy);
+                                            Gson gson = new Gson();
+                                            String json = gson.toJson(coor);
+                                            tcp.sendMessage(json);
+                                        }
+                                    }
+                                }
+                        ).start();
+                        break;
+
+
+                    case R.id.rbtn:
+                        Log.e("right", "presiooooooooon");
+                        Rpress = true;
+                        new Thread(
+                                () -> {
+                                    while (Rpress) {
+                                        if (posx <= 1100) {
+                                            posx += 0.2;
+
+                                            Coord coor = new Coord(posx, posy);
+                                            Gson gson = new Gson();
+                                            String json = gson.toJson(coor);
+                                            tcp.sendMessage(json);
+                                        }
+                                    }
+                                }
+                        ).start();
+                        break;
+
                 }
                 break;
-
-
 
 
             case MotionEvent.ACTION_UP:
@@ -120,6 +160,17 @@ public class Control extends AppCompatActivity implements View.OnTouchListener,O
                         Dpress=false;
                         Log.e("down","Suaveeee");
                         break;
+
+                    case R.id.lbtn:
+                        Lpress=false;
+                        Log.e("down","Suaveeee");
+                        break;
+
+                    case R.id.rbtn:
+                        Rpress=false;
+                        Log.e("down","Suaveeee");
+                        break;
+
                 }
         break;
 
