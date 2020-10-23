@@ -5,9 +5,9 @@ public class Coord {
     private float y;
     private String type = "Coord";
 
-    public Coord(float posx, float posy){}
+    public Coord(){}
 
-    public Coord(int x,int y) {
+    public Coord(float x,float y) {
         super();
         this.x=x;
         this.y=y;

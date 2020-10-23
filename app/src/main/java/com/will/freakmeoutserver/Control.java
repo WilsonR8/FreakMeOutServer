@@ -68,13 +68,11 @@ public class Control extends AppCompatActivity implements View.OnTouchListener,O
                     case R.id.ubtn:
                         Log.e("up", "presiooooooooon");
                         Upress = true;
-
                         new Thread(
                                 () -> {
                                     while (Upress) {
                                         if (posy >= 10) {
-                                            posy -= 0.2;
-
+                                            posy -= 0.05;
                                             Coord coor = new Coord(posx, posy);
                                             Gson gson = new Gson();
                                             String json = gson.toJson(coor);
@@ -93,7 +91,7 @@ public class Control extends AppCompatActivity implements View.OnTouchListener,O
                                 () -> {
                                     while (Dpress) {
                                         if (posy <= 650) {
-                                            posy += 0.2;
+                                            posy += 0.05;
 
                                             Coord coor = new Coord(posx, posy);
                                             Gson gson = new Gson();
@@ -113,7 +111,7 @@ public class Control extends AppCompatActivity implements View.OnTouchListener,O
                                 () -> {
                                     while (Lpress) {
                                         if (posx >= 50) {
-                                            posx -= 0.2;
+                                            posx -= 0.05;
 
                                             Coord coor = new Coord(posx, posy);
                                             Gson gson = new Gson();
@@ -133,7 +131,7 @@ public class Control extends AppCompatActivity implements View.OnTouchListener,O
                                 () -> {
                                     while (Rpress) {
                                         if (posx <= 1100) {
-                                            posx += 0.2;
+                                            posx += 0.05;
 
                                             Coord coor = new Coord(posx, posy);
                                             Gson gson = new Gson();
