@@ -12,6 +12,7 @@ import android.widget.Button;
 
 import com.google.gson.Gson;
 import com.will.freakmeoutserver.Model.Coord;
+import com.will.freakmeoutserver.Model.Grab;
 
 public class Control extends AppCompatActivity implements View.OnTouchListener,OnMessage {
 
@@ -24,10 +25,12 @@ public class Control extends AppCompatActivity implements View.OnTouchListener,O
     public float posx=250,posy=250;
 
 
+
     Boolean Upress = false;
     Boolean Dpress = false;
     Boolean Lpress= false;
     Boolean Rpress = false;
+    Boolean Gpress=false;
 
 
 
@@ -64,6 +67,25 @@ public class Control extends AppCompatActivity implements View.OnTouchListener,O
         switch(event.getAction()){
             case MotionEvent.ACTION_DOWN:
                 switch(v.getId()) {
+
+
+                    case R.id.grab:
+                        Log.e("grab", "graaaaaaaaaaaaab");
+                        Gpress=true;
+                        new Thread(
+                        ()-> {
+                            while(Gpress){
+                                int g=0;
+                                Grab grab = new Grab(g);
+                                Gson gson = new Gson();
+                                String json= gson.toJson(grab);
+                                tcp.sendMessage(json);
+                            }
+                        }
+                        ).start();
+                        break;
+
+
 
                     case R.id.ubtn:
                         Log.e("up", "presiooooooooon");
@@ -168,6 +190,11 @@ public class Control extends AppCompatActivity implements View.OnTouchListener,O
                         Rpress=false;
                         Log.e("down","Suaveeee");
                         break;
+
+
+                    case R.id.grab:
+                        Gpress= false;
+                        Log.e("grab","suaveeee");
 
                 }
         break;
