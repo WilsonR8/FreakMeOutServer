@@ -47,7 +47,7 @@ public class Control extends AppCompatActivity implements View.OnTouchListener,O
         dbtn = findViewById(R.id.dbtn);
         ubtn = findViewById(R.id.ubtn);
         rbtn = findViewById(R.id.rbtn);
-        grab = findViewById(R.id.grab);
+
 
 
 
@@ -58,7 +58,7 @@ public class Control extends AppCompatActivity implements View.OnTouchListener,O
         dbtn.setOnTouchListener(this);
         ubtn.setOnTouchListener(this);
         rbtn.setOnTouchListener(this);
-        grab.setOnTouchListener(this);
+
 
     }
 
@@ -67,25 +67,6 @@ public class Control extends AppCompatActivity implements View.OnTouchListener,O
         switch(event.getAction()){
             case MotionEvent.ACTION_DOWN:
                 switch(v.getId()) {
-
-
-                    case R.id.grab:
-                        Log.e("grab", "graaaaaaaaaaaaab");
-                        Gpress=true;
-                        new Thread(
-                        ()-> {
-                            while(Gpress){
-                                int g=0;
-                                Grab grab = new Grab(g);
-                                Gson gson = new Gson();
-                                String json= gson.toJson(grab);
-                                tcp.sendMessage(json);
-                            }
-                        }
-                        ).start();
-                        break;
-
-
 
                     case R.id.ubtn:
                         Log.e("up", "presiooooooooon");
@@ -190,12 +171,6 @@ public class Control extends AppCompatActivity implements View.OnTouchListener,O
                         Rpress=false;
                         Log.e("down","Suaveeee");
                         break;
-
-
-                    case R.id.grab:
-                        Gpress= false;
-                        Log.e("grab","suaveeee");
-
                 }
         break;
 
